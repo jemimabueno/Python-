@@ -1,3 +1,5 @@
+# Precisava preencher a base de dados com horários repetidos e dias da semana por um longo período, e ao invés de fazer isso manualmente, através do python foi possível realizar isso em segundos.
+
 from datetime import datetime, timedelta
 import pandas as pd
 
