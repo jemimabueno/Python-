@@ -1,0 +1,39 @@
+from datetime import datetime, timedelta
+import pandas as pd
+
+# Configurações
+responsavel = "Nome Ficticio"
+sala = "Sala de Reuniao X"
+
+# Dias da semana e horários correspondentes
+dias_semana_horarios = {
+    0: ("15:00", "18:00"),  # Segunda-feira
+    2: ("14:00", "18:00"),  # Quarta-feira
+    3: ("09:00", "12:00"),  # Quinta-feira
+    4: ("08:00", "12:00")   # Sexta-feira
+}
+
+# Datas de 1º de setembro a 31 de dezembro de 2025
+inicio = datetime(2025, 9, 1)
+fim = datetime(2025, 12, 31)
+
+registros = []
+
+# Geração das reservas
+data_atual = inicio
+while data_atual <= fim:
+    if data_atual.weekday() in dias_semana_horarios:
+        hora_inicio, hora_fim = dias_semana_horarios[data_atual.weekday()]
+        registros.append({
+            "Sala": sala,
+            "Data": data_atual.strftime("%Y-%m-%d"),
+            "Hora de Início": hora_inicio,
+            "Hora de Término": hora_fim,
+            "Responsável": responsavel
+        })
+    data_atual += timedelta(days=1)
+
+# Criar DataFrame e exportar para Excel
+df = pd.DataFrame(registros)
+df.to_excel("reserva_dogfy_set_dez_2025.xlsx", index=False)
+print("Finalizado")
